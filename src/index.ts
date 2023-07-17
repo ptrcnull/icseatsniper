@@ -49,8 +49,8 @@ class Segment extends Array<TrainSeat> {
 async function main() {
 	const answers = await getAnswers()
 
-	const trips = await getJourneys(answers)
-	answers.journey = trips[0].value!
+	// const trips = await getJourneys(answers)
+	// answers.journey = trips[0].value!
 	const tripId = answers.journey!.tripId!
 	// console.log(answers.journey)
 

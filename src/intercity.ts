@@ -32,7 +32,7 @@ export function getTrainCarParams(
 	return {
 		...data._trainParams,
 		wagon: trainCar.toString(),
-		data: '20230717',
+		data: data._trainParams.dataWyjazduPociagu.substring(0, 8),
 		nrSkladu: nrSkladu,
 		typSkladu: data.typSkladu,
 	}
