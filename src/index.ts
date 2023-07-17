@@ -1,3 +1,4 @@
+import { parseArgs } from 'node:util'
 import { Leg, Stop, StopOver } from 'hafas-client'
 import {
 	getEMUStationCode,
@@ -47,7 +48,34 @@ class Segment extends Array<TrainSeat> {
 }
 
 async function main() {
-	const answers = await getAnswers()
+	const args = parseArgs({
+		options: {
+			'from': {
+				type: 'string'
+			},
+			'to': {
+				type: 'string'
+			},
+			'date': {
+				type: 'string'
+			},
+			'time': {
+				type: 'string'
+			}
+		}
+	})
+	if (args.values.from) {
+		const from = (await getStations(args.values.from))[0]
+		args.values.from = from.value
+		console.log('From:', from.name)
+	}
+	if (args.values.to) {
+		const to = (await getStations(args.values.to))[0]
+		args.values.to = to.value
+		console.log('To:', to.name)
+	}
+
+	const answers = await getAnswers(args.values)
 
 	// const trips = await getJourneys(answers)
 	// answers.journey = trips[0].value!

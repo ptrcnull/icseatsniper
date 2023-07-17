@@ -50,6 +50,6 @@ const questions = [
 	},
 ]
 
-export function getAnswers(): Promise<Answers> {
-	return inquirer.prompt(questions)
+export function getAnswers(answers?: Answers): Promise<Answers> {
+	return inquirer.prompt(questions, answers)
 }
