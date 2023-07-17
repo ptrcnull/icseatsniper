@@ -2,6 +2,7 @@ import { XMLParser } from 'fast-xml-parser'
 import fs from 'fs/promises'
 import { getEMUStationCode } from './hafas.js'
 import { getUICStationCode } from './uic.js'
+import { inspect } from 'node:util'
 
 // service=sklad&kategoria=IC&numer=3554
 // dataWyjazduPociagu=202307170545&dataPrzyjazduPociagu=202307171422
@@ -84,7 +85,7 @@ export async function getTrainData(params: TrainParams): Promise<TrainData> {
 	}
 
 	if (res == null) {
-		throw new Error('did not get any train cars for: ' + params)
+		throw new Error('did not get any train cars for: ' + inspect(params))
 	}
 
 	return res
@@ -105,7 +106,7 @@ async function _getTrainData(params: TrainParams): Promise<TrainData> {
 	const res = await fetch(url).then((res) => res.json())
 
 	if (res == null) {
-		throw new Error('did not get any train cars for: ' + params)
+		throw new Error('did not get any train cars for: ' + inspect(params))
 	}
 
 	res._trainParams = params
